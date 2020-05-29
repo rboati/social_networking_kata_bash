@@ -1,0 +1,5 @@
+/build
+/dist
+/lib/bashlibs
+/src/lib
+/test/lib
