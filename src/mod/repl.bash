@@ -5,6 +5,13 @@ repl() {
 	# shellcheck disable=SC2034
 	local LOGDOMAIN="repl"
 	local user cmd args
+	if [[ ! -d  "$HOME/.config/social_networking_kata" ]]; then
+		mkdir -p "$HOME/.config/social_networking_kata"
+	fi
+	local HISTFILE="$HOME/.config/social_networking_kata/repl_history"
+	local HISTCONTROL="ignoreboth:erasedups"
+	history -c
+	history -r
 
 	while :; do # repl loop
 		while read -r -e -p '> ' user cmd args; do # read loop
@@ -39,5 +46,7 @@ repl() {
 			*)
 				echoerror "Unknown command '$cmd'"
 		esac
+		history -s "${user}${cmd:+ $cmd}${args:+ $args}"
+		history -w
 	done
 }
