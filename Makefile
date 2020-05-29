@@ -42,7 +42,7 @@ uninstall:
 	rm -f "$(DESTDIR)$(prefix)/bin/social_networking_kata"
 
 .PHONY: dist
-dist: clean build | dist/.
+dist: clean update-bashlibs build | dist/.
 	tar czf "dist/social_networking_kata-$(VERSION).tar.gz" --owner=0 --group=0 -C build bin share
 
 .PHONY: check
@@ -51,7 +51,7 @@ check: test
 # end GNU Makefile Conventions
 
 
-BASHLIBS_FILES := libimport.bash libassert.bash libloglevel.bash
+BASHLIBS_FILES := libimport.bash libassert.bash libloglevel.bash libipc.bash libdata.bash
 SRC_FILES := $(shell find src -type f) $(patsubst %, src/lib/%, $(BASHLIBS_FILES))
 BUILD_FILES := $(patsubst src/%.bash, build/share/social_networking_kata/%.bash, $(SRC_FILES))
 SRC_DIRS := $(dir $(SRC_FILES))
@@ -87,6 +87,9 @@ src/lib/lib%.bash: lib/bashlibs/lib%.bash | src/lib/.
 test/lib/lib%.bash: lib/bashlibs/lib%.bash | test/lib/.
 	cp "$<" "$@"
 
+.PHONY: update-bashlibs
+update-bashlibs:
+	cd lib/bashlibs && git pull --ff-only
 
 .PHONY: update-src-lib
 update-src-lib: $(patsubst %, src/lib/%, $(BASHLIBS_FILES))

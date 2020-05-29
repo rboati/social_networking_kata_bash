@@ -6,14 +6,15 @@ The original specifications are available at [Social Networking kata](https://gi
 
 ## Prerequisites
 - bash > 5.0
+- sqlite3
 - make
-
 
 ## Installation
 It's possible to install the project in your system with the following command:
 ```
 make install [DESTDIR=''] [prefix=$HOME/.local]
 ```
+By specifing optionally `DESTDIR` and `prefix` you can customize the installation path. The resulting installation path is the concatenation of the two variables: `DESTDIR/prefix`.
 
 The following command generates a compressed archive in the `dist` directory to easy the distribution:
 ```

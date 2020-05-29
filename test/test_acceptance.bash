@@ -1,18 +1,21 @@
 bash_import "$SRC_DIR/mod/repl.bash"
+bash_import "$SRC_DIR/mod/user.bash"
 bash_import "$SRC_DIR/mod/time.bash"
 
 
 testsuite_acceptance_setup() {
-	# overwrite time::current_time()
-	current_time() { echo "$MOCK_TIME"; }
 	declare -gi MOCK_TIME=0
+	# overwrite time.bash::current_time()
+	current_time() { echo "$MOCK_TIME"; }
+	init_users
 }
 
 testsuite_acceptance_teardown() {
 	fini_users
-	unset MOCK_TIME
 	bash_import "$SRC_DIR/mod/time.bash" # restore current_time
+	unset MOCK_TIME
 }
+
 
 
 testsuite_acceptance_test_1() {

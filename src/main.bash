@@ -15,10 +15,15 @@ set_loglevel "$LOGLEVEL"
 
 bash_import libassert.bash
 
-bash_import ./mod/repl.bash
+bash_import ./mod/repl.bash # repl
+bash_import ./mod/user.bash # init_users, fini_users
+
+
 
 main() {
 	repl
 }
 
+init_users
+trap 'fini_users' EXIT
 main "$@"
