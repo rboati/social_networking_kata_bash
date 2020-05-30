@@ -9,6 +9,13 @@ The original specifications are available at [Social Networking kata](https://gi
 - sqlite3
 - make
 
+The project has been tested only on Linux platform.
+
+On a Debian system you can check and install all dependencies with the following command:
+```
+apt install bash coreutils sqlite3 make
+```
+
 ## Installation
 It's possible to install the project in your system with the following command:
 ```
@@ -23,11 +30,22 @@ make dist
 
 
 ## Run
+The project needs to download some bash libraries from [bashlibs](https://github.com/rboati/bashlibs) before running.
+Execute the following command to ensure that these libraries are downloaded or updated:
+```
+make update
+```
+Installation is not required to run the project. This project supports execution directly from the source directory with this command:
 ```
 make run
 ```
+Anyway if you install the project, you'll find the main script linked as `social_networking_kata` in the `bin` directory of your installation directory. If the `bin` directory is already in your `PATH` to run the program you just need to type:
+```
+social_networking_kata
+```
 
 ## Running the tests
+
 ```
 make test
 ```
