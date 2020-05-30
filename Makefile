@@ -60,6 +60,7 @@ BUILD_DIRS := $(patsubst src/%, build/share/social_networking_kata/%, $(SRC_DIRS
 .PHONY: build
 build: update-src-lib
 build: $(BUILD_FILES)
+build: build/.nutsh
 build: build/bin/social_networking_kata
 
 
@@ -68,6 +69,10 @@ build/share/social_networking_kata/%.bash: src/%.bash  | $(BUILD_DIRS:=/.)
 
 build/bin/social_networking_kata: build/share/social_networking_kata/main.bash | build/bin/.
 	 ln -s -f -T ../share/social_networking_kata/main.bash "$@"
+
+build/.nutsh: | build/.
+	echo '# nutshell (see https://github.com/rboati/nutshell)' > "$@"
+	echo 'export PATH="$$PWD/bin:$$PATH"' >> "$@"
 
 
 .PRECIOUS: %/.
