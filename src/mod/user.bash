@@ -1,5 +1,6 @@
 
 bash_import libdata.bash
+
 bash_import ./time.bash
 
 declare -gA USERS_DB=( )
@@ -62,9 +63,32 @@ reset_users() {
 	query USERS_DB "DELETE FROM user" > /dev/null
 }
 
-user_post() { return 1; } #TODO
+user_post() {
+	local user="$1"
+	local msg="$2"
+	if [[ -z $msg ]]; then
+		return 1
+	fi
+	add_user "$user" || true
+	local -i record_id
+	get_record USERS_DB "SELECT id FROM user WHERE name=$(sql_quote "$user")"
+	query USERS_DB "INSERT INTO post (author_id, content, timestamp) VALUES ($record_id, $(sql_quote "$msg"), datetime('$(current_time)', 'unixepoch') )" > /dev/null
+}
 
-user_follow() { return 1; } #TODO
+user_follow() {
+	local user="$1"
+	local user_followed="$2"
+	if ! user_exists "$user_followed"; then
+		return 1
+	fi
+	add_user "$user" || true
+
+	local -i user_id followed_id
+	get_record USERS_DB "SELECT id FROM user WHERE name=$(sql_quote "$user")" user_
+	get_record USERS_DB "SELECT id FROM user WHERE name=$(sql_quote "$user_followed")" followed_
+	query USERS_DB "INSERT INTO following (follower_id, followed_id) VALUES ($user_id, $followed_id)" > /dev/null
+
+}
 
 user_unfollow() { return 1; } #TODO
 
