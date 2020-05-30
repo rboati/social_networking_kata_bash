@@ -17,8 +17,21 @@ declare -a MY_TESTS=(
 	"$THIS_DIR/test_user.bash"
 )
 
-for i in "${MY_TESTS[@]}"; do
-	DEBUG=1 bash_import "$i"
-done
-run_tests
-print_test_results
+declare -i SEPARATE_RUN=0
+
+if (( SEPARATE_RUN == 1 )); then
+	for i in "${MY_TESTS[@]}"; do
+		(
+			DEBUG=1 bash_import "$i"
+			run_tests
+			print_test_results
+		)
+		echo
+	done
+else
+	for i in "${MY_TESTS[@]}"; do
+		DEBUG=1 bash_import "$i"
+	done
+	run_tests
+	print_test_results
+fi
