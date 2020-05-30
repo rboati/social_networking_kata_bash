@@ -92,7 +92,49 @@ user_follow() {
 
 user_unfollow() { return 1; } #TODO
 
-user_read() { return 1; } #TODO
+user_read() {
+	local user="$1"
+	if ! user_exists "$user"; then
+		return 1
+	fi
+	local record_timestamp record_content
+	local quoted_user="$(sql_quote "$user")"
+	local sql="$( cat <<- EOF
+		SELECT content, strftime('%s',timestamp) timestamp
+		FROM post p JOIN user u ON p.author_id = u.id
+		WHERE u.name = $quoted_user
+		ORDER BY p.id DESC
+		EOF
+	)"
+	while iter_record USERS_DB "$sql"; do
+		printf '%s (%s)\n' "$record_content" "$(human_relative_time "@$record_timestamp")"
+ 	done
+}
 
-user_wall() { return 1; } #TODO
+user_wall() {
+	local user="$1"
+	if ! user_exists "$user"; then
+		return 1
+	fi
+ 	local record_name record_content record_timestamp
+	local quoted_user="$(sql_quote "$user")"
+	local sql="$( cat <<- EOF
+		SELECT u.name name, p.content content, strftime('%s',timestamp) timestamp
+		FROM post p
+			JOIN user u ON p.author_id = u.id
+		WHERE u.name = $quoted_user OR
+			u.id IN (
+			SELECT u2.id id
+			FROM following f
+				JOIN user u1 ON f.follower_id = u1.id
+				JOIN user u2 ON f.followed_id = u2.id
+			WHERE u1.name = $quoted_user
+		) ORDER BY p.id DESC
+		EOF
+	)"
+	query USERS_DB "$sql" | while parse_record; do
+ 		printf '%s - %s (%s)\n' "$record_name" "$record_content" "$(human_relative_time "@$record_timestamp")"
+ 	done
+}
+
 

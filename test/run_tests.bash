@@ -14,6 +14,7 @@ bash_import libloglevel.bash
 declare -a MY_TESTS=(
 	"$THIS_DIR/test_acceptance.bash"
 	"$THIS_DIR/test_repl.bash"
+	"$THIS_DIR/test_time.bash"
 	"$THIS_DIR/test_user.bash"
 )
 
