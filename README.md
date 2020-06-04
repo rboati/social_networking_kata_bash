@@ -8,12 +8,13 @@ The original specifications are available at [Social Networking kata](https://gi
 - bash > 5.0
 - sqlite3
 - make
+- kcov for test coverage
 
 The project has been tested only on Linux platform.
 
 On a Debian system you can check and install all dependencies with the following command:
 ```
-apt install bash coreutils sqlite3 make
+apt install bash coreutils sqlite3 make kcov
 ```
 
 ## Installation
@@ -45,9 +46,13 @@ social_networking_kata
 ```
 
 ## Running the tests
-
+Execute the following command to run the tests:
 ```
 make test
+```
+If you have `kcov` on your system you can also launch the test coverage reports in the `coverage` directory:
+```
+make coverage
 ```
 
 ## Author
