@@ -1,6 +1,6 @@
-bash_import "$SRC_DIR/mod/repl.bash"
-bash_import "$SRC_DIR/mod/user.bash"
-bash_import "$SRC_DIR/mod/time.bash"
+bash_source "$SRC_DIR/mod/repl.bash"
+bash_source "$SRC_DIR/mod/user.bash"
+bash_source "$SRC_DIR/mod/time.bash"
 
 
 testsuite_acceptance_setup() {

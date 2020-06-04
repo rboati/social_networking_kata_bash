@@ -15,8 +15,8 @@ set_loglevel "$LOGLEVEL"
 
 bash_import libassert.bash
 
-bash_import ./mod/repl.bash # repl
-bash_import ./mod/user.bash # init_users, fini_users
+bash_source ./mod/repl.bash # repl
+bash_source ./mod/user.bash # init_users, fini_users
 
 
 

@@ -1,5 +1,5 @@
-bash_import "$SRC_DIR/mod/repl.bash"
-bash_import "$SRC_DIR/mod/user.bash"
+bash_source "$SRC_DIR/mod/repl.bash"
+bash_source "$SRC_DIR/mod/user.bash"
 
 testsuite_repl_setup() {
 	init_users

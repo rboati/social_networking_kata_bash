@@ -1,4 +1,4 @@
-bash_import "$SRC_DIR/mod/time.bash"
+bash_source "$SRC_DIR/mod/time.bash"
 
 testsuite_time_setup() {
 	# overwrite time.bash::current_time()

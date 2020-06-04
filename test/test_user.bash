@@ -1,4 +1,4 @@
-bash_import "$SRC_DIR/mod/user.bash"
+bash_source "$SRC_DIR/mod/user.bash"
 
 testsuite_user_setup() {
 	init_users

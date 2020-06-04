@@ -1,7 +1,7 @@
 
 bash_import libdata.bash
 
-bash_import ./time.bash
+bash_source ./time.bash
 
 declare -gA USERS_DB=( )
 #declare -gA USERS_DB=( [file]=user.db [vfs]=unix )

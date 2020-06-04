@@ -23,7 +23,7 @@ declare -i SEPARATE_RUN=0
 if (( SEPARATE_RUN == 1 )); then
 	for i in "${MY_TESTS[@]}"; do
 		(
-			DEBUG=1 bash_import "$i"
+			bash_source "$i"
 			run_tests
 			print_test_results
 		)
@@ -31,7 +31,7 @@ if (( SEPARATE_RUN == 1 )); then
 	done
 else
 	for i in "${MY_TESTS[@]}"; do
-		DEBUG=1 bash_import "$i"
+		bash_source "$i"
 	done
 	run_tests
 	print_test_results

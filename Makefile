@@ -14,7 +14,7 @@ all: build
 
 .PHONY: mostlyclean
 mostlyclean:
-	rm -rf build dist
+	rm -rf build dist coverage
 
 .PHONY: clean
 clean: mostlyclean
@@ -28,7 +28,7 @@ maintainer-clean::
 	@echo 'This command is intended for maintainers to use; it'
 	@echo 'deletes files that may need special tools to rebuild.'
 	rm -rf lib/bashlibs
-	rm -r lib
+	rm -r lib 2> /dev/null || true
 maintainer-clean:: distclean
 
 .PHONY: install
@@ -111,3 +111,6 @@ run: update-src-lib
 test: update-test-lib
 	@bash ./test/run_tests.bash
 
+.PHONY: coverage
+coverage: update-test-lib | coverage/.
+	kcov --exclude-pattern=test coverage test/run_tests.bash 2> /dev/null

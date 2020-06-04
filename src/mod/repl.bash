@@ -1,4 +1,4 @@
-bash_import ./user.bash
+bash_source ./user.bash
 
 
 repl() {

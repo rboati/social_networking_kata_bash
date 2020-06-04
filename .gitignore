@@ -1,5 +1,6 @@
 /build
 /dist
+/coverage
 /lib/bashlibs
 /src/lib
 /test/lib
