@@ -1,14 +1,14 @@
 # Social Networking Kata
 This implementation is written in bash for fun and experimentation.
 
-The original specifications are available at [Social Networking kata](https://github.com/xpeppers/social_networking_kata_kata)
+The original specifications are available at [Social Networking kata](https://github.com/xpeppers/social_networking_kata_kata).
 
 
 ## Prerequisites
 - bash > 5.0
 - sqlite3
 - make
-- kcov for test coverage
+- kcov (for test coverage)
 
 The project has been tested only on Linux platform.
 
